@@ -1,0 +1,13 @@
+{
+  "id": "DevilsDeckbox",
+  "name": "Devil's Deckbox",
+  "display_name": "Devil's Deckbox",
+  "author": ["NightFreeze"],
+  "description": "Adds 5 new Decks to the game: Treasure Deck, Chortle Deck, Clueless Deck, Scourge Deck and Contrarilogue Deck. Special thanks to UnknownEternity and jlwoolf for the codebase template.",
+  "prefix": "devildecks",
+  "main_file": "index.lua",
+  "badge_colour": "",
+  "badge_text_colour": "",
+  "version": "1.0.0",
+  "dependencies": ["Steamodded (>=1.*)", "Lovely (>=0.6)"]
+}
