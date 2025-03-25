@@ -8,6 +8,6 @@
   "main_file": "index.lua",
   "badge_colour": "",
   "badge_text_colour": "",
-  "version": "1.0.0",
+  "version": "1.0.1 Beta",
   "dependencies": ["Steamodded (>=1.*)", "Lovely (>=0.6)"]
 }
