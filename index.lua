@@ -92,11 +92,11 @@ function Back:apply_to_run(...)
 	if self.effect.config.scourge then
 		G.E_MANAGER:add_event(Event({
 			func = function()
-				SMODS.add_card({set = 'Joker', area = G.jokers, rarity = 'Rare', no_edition = true})
-				SMODS.add_card({set = 'Joker', area = G.jokers, rarity = 'Rare', no_edition = true})
-				SMODS.add_card({set = 'Joker', area = G.jokers, rarity = 'Rare', no_edition = true})
-				SMODS.add_card({set = 'Joker', area = G.jokers, rarity = 'Rare', no_edition = true})
-				SMODS.add_card({set = 'Joker', area = G.jokers, rarity = 'Rare', no_edition = true})
+				SMODS.add_card({set = 'Joker', area = G.jokers, rarity = 'Common', no_edition = true})
+				SMODS.add_card({set = 'Joker', area = G.jokers, rarity = 'Common', no_edition = true})
+				SMODS.add_card({set = 'Joker', area = G.jokers, rarity = 'Common', no_edition = true})
+				SMODS.add_card({set = 'Joker', area = G.jokers, rarity = 'Common', no_edition = true})
+				SMODS.add_card({set = 'Joker', area = G.jokers, rarity = 'Common', no_edition = true})
 				return true
 			end,
 		}))
@@ -170,14 +170,14 @@ SMODS.Atlas({
 SMODS.Back({
 	atlas = "devils_deckbox",
 	config = {
-		dollars = 146,
+		dollars = 196,
 		treasure = true,
 	},
 	key = "treasure",
 	loc_txt = {
 		name = "Treasure Deck",
 		text = {
-			"Start with {C:money}$150{} and",
+			"Start with {C:money}$200{} and",
 			"{C:attention}2{} copies of {C:tarot,T:c_temperance}Temperance{}",
 			"{C:inactive}at a price...{}",
 		},
@@ -258,7 +258,7 @@ SMODS.Back({
 		name = "Scourge Deck",
 		text = {
 			"Start with {C:attention}5{}", 
-			"random {C:rare}Rare{} Jokers",
+			"random {C:common}Common{} Jokers",
 			"{C:inactive}at a price...{}",
 		},
 	},
