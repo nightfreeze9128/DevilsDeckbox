@@ -73,16 +73,6 @@ function Back:apply_to_run(...)
 				card:set_edition('e_negative')
 				G.consumeables:emplace(card)
 
-				local card = create_card("Tarot", G.consumeables, false, nil, nil, nil, "c_fool", "deck")
-				card:add_to_deck()
-				card:set_edition('e_negative')
-				G.consumeables:emplace(card)
-
-				local card = create_card("Tarot", G.consumeables, false, nil, nil, nil, "c_fool", "deck")
-				card:add_to_deck()
-				card:set_edition('e_negative')
-				G.consumeables:emplace(card)
-
 				return true
 			end,
 		}))
@@ -151,6 +141,14 @@ function Back:trigger_effect(args, ...)
 			G.E_MANAGER:add_event(Event({
 				func = function()
 					SMODS.add_card({set = 'Joker', area = G.jokers, key = "j_madness", edition = 'e_negative', stickers = {'eternal'}})
+					
+					-- sets the sell value of all jokers to $-10 (shoutout paperback)
+					for _, v in ipairs(G.jokers.cards) do
+						v.sell_cost = -10
+					end
+					
+					self.effect.config.scourge_price = true
+
 					return true
 				end,
 			}))
@@ -184,11 +182,6 @@ SMODS.Back({
 	},
 	name = "Treasure Deck",
 	pos = { x = 0, y = 0 },
-	prefix_config = {
-		key = {
-			mod = false,
-		},
-	},
 
 })
 
@@ -209,11 +202,6 @@ SMODS.Back({
 	},
 	name = "Chortle Deck",
 	pos = { x = 1, y = 0 },
-	prefix_config = {
-		key = {
-			mod = false,
-		},
-	},
 
 })
 
@@ -232,18 +220,13 @@ SMODS.Back({
 		name = "Clueless Deck",
 		text = {
 			"Start with {C:tarot,T:v_tarot_tycoon}Tarot Tycoon{}",
-			"and {C:attention}7{} {C:dark_edition,T:e_negative}Negative{} copies",
+			"and {C:attention}5{} {C:dark_edition,T:e_negative}Negative{} copies",
 			"of {C:tarot,T:c_fool}The Fool{}",
 			"{C:inactive}at a price...{}",
 		},
 	},
 	name = "Clueless Deck",
 	pos = { x = 2, y = 0 },
-	prefix_config = {
-		key = {
-			mod = false,
-		},
-	},
 
 })
 
@@ -252,6 +235,7 @@ SMODS.Back({
 	atlas = "devils_deckbox",
 	config = {
 		scourge = true,
+		scourge_price = false,
 	},
 	key = "scourge",
 	loc_txt = {
@@ -264,12 +248,23 @@ SMODS.Back({
 	},
 	name = "Scourge Deck",
 	pos = { x = 3, y = 0 },
-	prefix_config = {
-		key = {
-			mod = false,
-		},
-	},
 
+	-- while scourge deck "price" is active, set all new joker sell values to $-10
+	-- triggers whenever any card is added, still a bit redundant but shouldnt lag anymore
+	calculate = function(self, back, context)
+		if context.buying_card and back.effect.config.scourge_price then
+			-- sets the sell value of all jokers to $-10 (shoutout paperback)
+			for _, v in ipairs(G.jokers.cards) do
+				v.sell_cost = -10
+			end
+
+			return {
+				cardarea = G.jokers, 
+				buying_card = true,
+				back = back
+			}
+		end
+	end
 })
 
 -- contrarilogue deck
@@ -286,6 +281,7 @@ SMODS.Back({
 		},
 		clueless = true,
 		scourge = true,
+		scourge_price = false,
 	},
 	key = "contrarilogue",
 	loc_txt = {
@@ -297,10 +293,20 @@ SMODS.Back({
 	},
 	name = "Contrarilogue Deck",
 	pos = { x = 0, y = 1 },
-	prefix_config = {
-		key = {
-			mod = false,
-		},
-	},
 
+	-- while scourge deck "price" is active, set all new joker sell values to $-10
+	calculate = function(self, back, context)
+		if context.buying_card and back.effect.config.scourge_price then
+			-- sets the sell value of all jokers to $-10 (shoutout paperback)
+			for _, v in ipairs(G.jokers.cards) do
+				v.sell_cost = -10
+			end
+
+			return {
+				cardarea = G.jokers, 
+				buying_card = true,
+				back = back
+			}
+		end
+	end
 })
