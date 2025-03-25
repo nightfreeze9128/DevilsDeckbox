@@ -271,7 +271,7 @@ SMODS.Back({
 SMODS.Back({
 	atlas = "devils_deckbox",
 	config = {
-		dollars = 146,
+		dollars = 196,
 		treasure = true,
 		joker_slot = 2,
 		chortle = true,
